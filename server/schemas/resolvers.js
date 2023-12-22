@@ -5,7 +5,7 @@ const resolvers = {
     Query: {
         me: async (parent, args, context) => {
             if (context.user) {
-                return User.findOne({_id: context.user._id}).populate('savedBooks');
+                return User.findOne({_id: context.user._id});
             }
         },
     },
@@ -38,7 +38,7 @@ const resolvers = {
 
             return {token, user};
         },
-        saveBook: async (parent, {userId, bookId, title, description, authors, image, link }, context) => {
+        saveBook: async (parent, {bookId, title, description, authors, image, link }, context) => {
             if (context.user) {
                 return User.findOneAndUpdate(
                     {
